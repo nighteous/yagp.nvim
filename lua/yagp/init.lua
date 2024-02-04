@@ -1,7 +1,6 @@
-M = {}
+local M = {}
 
 M.setup = function ()
-	vim.api.nvim_create_user_command('AskGemini', use_gemini())
 end
 
 local function append_to_buffer(bufnr, text_split)
@@ -52,3 +51,4 @@ local function use_gemini()
 
 end
 
+return M
