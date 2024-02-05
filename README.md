@@ -27,7 +27,7 @@ use {
 }
 ```
 
-To use this, Write your prompt over the top of the code you wish to use the prompt for. Visual select the prompt and the code and use `:'<'>lua use_gemini():` to use the function. It will `vsplit` a buffer named `yagpchat` and append your chat to it with the response from Gemini API.
+To use this, Write your prompt over the top of the code you wish to use the prompt for. Visual select the prompt and the code and use `:'<'>lua use_gemini()` to use the function. It will `vsplit` a buffer named `yagpchat` and append your chat to it with the response from Gemini API.
 
 
 ### TO DO
