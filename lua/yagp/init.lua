@@ -34,18 +34,16 @@ function use_gemini()
 	local user_input = table.concat(text, "\r")
 
 	-- Appending to buffer
-	-- What does the following code do?
 	vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "USER: " })
 	user_input_split = vim.split(user_input, "\r")
 	append_to_buffer(bufnr, user_input_split)
 
 	local response = ask_gemini(user_input)
-	local response_json = vim.json.decode(response[1])
-	local response_text = response_json["candidates"][1]["content"]["parts"][1]["text"]
+	print(response)
 
 	-- Appending output to buffer
 	vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "BOT: " })
-	local response_split = vim.split(response_text, "\n")
+	local response_split = vim.split(response, "\n")
 	append_to_buffer(bufnr, response_split)
 
 	vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "\r" })

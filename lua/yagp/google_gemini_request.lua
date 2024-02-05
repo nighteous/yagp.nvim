@@ -1,5 +1,4 @@
-local http = require"socket.http"
-local ltn12 = require"ltn12"
+local curl = require('plenary.curl')
 
 local function ask_gemini(text)
     local API_KEY = os.getenv("GEMINI_API_KEY")
@@ -45,20 +44,20 @@ local function ask_gemini(text)
 
 	local response = {}
 
-    local result, respcode, respheaders, respstatus = http.request ({
-        method = "POST",
-        url = url,
+    local response = curl.post(url, {
+		body = body,
         headers = headers,
-		source = ltn12.source.string(body),
-		sink = ltn12.sink.table(response)
     })
 
-    if respcode ~= 200 then
+    if response.status ~= 200 then
 		print("We entered")
         error("Request failed" .. respcode)
     end
 
-    return response
+	local response_json = vim.json.decode(response.body)
+	local response_text = response_json["candidates"][1]["content"]["parts"][1]["text"]
+
+    return response_text
 end
 
 return {
