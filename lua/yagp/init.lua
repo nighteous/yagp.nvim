@@ -39,7 +39,6 @@ function use_gemini()
 	append_to_buffer(bufnr, user_input_split)
 
 	local response = ask_gemini(user_input)
-	print(response)
 
 	-- Appending output to buffer
 	vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, { "BOT: " })
